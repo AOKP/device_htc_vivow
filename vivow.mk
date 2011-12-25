@@ -24,6 +24,7 @@ PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
 
 PRODUCT_COPY_FILES += \
     device/htc/vivow/init.vivow.rc:root/init.vivow.rc \
+    device/htc/vivow/init.rc:root/init.rc \
     device/htc/vivow/ueventd.vivow.rc:root/ueventd.vivow.rc
 
 PRODUCT_COPY_FILES += \
@@ -32,7 +33,7 @@ PRODUCT_COPY_FILES += \
 ##    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
 
 ## (2) Also get non-open-source GSM-specific aspects if available
-$(call inherit-product-if-exists, vendor/htc/vivow/vivow-vendor.mk)
+$(call inherit-product-if-exists, vendor/htc/vivow/device-vendor.mk)
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -73,6 +74,12 @@ PRODUCT_PACKAGES += \
     lights.vivow \
     sensors.vivow \
     gps.vivow
+
+# Input device calibration files
+PRODUCT_COPY_FILES += \
+    device/htc/vivow/idc/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
+    device/htc/vivow/idc/elan-touchscreen.idc:system/usr/idc/elan-touchscreen.idc \
+    device/htc/vivow/idc/cy8c-touchscreen.idc:system/usr/idc/cy8c-touchscreen.idc
 
 # Keychars
 PRODUCT_COPY_FILES += \
@@ -195,7 +202,7 @@ PRODUCT_COPY_FILES += \
     device/htc/vivow/prebuilt/bcm4329.ko:system/lib/modules/bcm4329.ko
 
 # stuff common to all HTC phones
-$(call inherit-product, device/htc/common/common.mk)
+#$(call inherit-product, device/htc/common/common.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
 
@@ -208,9 +215,9 @@ $(call inherit-product, device/htc/vivow/media_a1026.mk)
 # htc audio settings
 $(call inherit-product, device/htc/vivow/media_htcaudio.mk)
 
-$(call inherit-product-if-exists, vendor/htc/vivow/vivow-vendor.mk)
+$(call inherit-product-if-exists, vendor/htc/vivow/device-vendor.mk)
 
 PRODUCT_NAME := htc_vivow
 PRODUCT_DEVICE := vivow
-PRODUCT_MODEL := HTC Incredible 2
+PRODUCT_MODEL := Incredible 2
 PRODUCT_MANUFACTURER := HTC

@@ -14,6 +14,7 @@
 /dev/adsp                 0660   system     audio
 /dev/pmem_audio	          0660   system     audio
 /dev/tpa2051d3	          0660   system     audio
+
 /dev/kgsl-2d0             0666    root      root
 /dev/kgsl-3d0             0666    root      root
 /dev/system_bus_freq      0660    system    system
@@ -49,3 +50,4 @@
 
 
 
+/dev/ttyHS0               0660   bluetooth  bluetooth

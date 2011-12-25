@@ -18,4 +18,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/vivow.mk
+    $(LOCAL_DIR)/cm.mk

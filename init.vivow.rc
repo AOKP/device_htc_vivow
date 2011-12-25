@@ -1,8 +1,11 @@
-on boot
-    mount debugfs /sys/kernel/debug /sys/kernel/debug
-    mkdir /data/radio 0770 radio radio
+import init.htc7x30.usb.rc
 
-on fs
+on early-init
+    export EXTERNAL_STORAGE /mnt/sdcard
+    mkdir /mnt/sdcard 0000 system system
+    symlink /mnt/sdcard /sdcard
+
+on early-fs
     mkdir /system
     mkdir /data 0771 system system
     mkdir /cache 0770 system cache
@@ -10,17 +13,14 @@ on fs
     mount ext4 /dev/block/mmcblk0p25 /system wait ro barrier=1
     mount ext4 /dev/block/mmcblk0p26 /data wait noatime nosuid nodev barrier=1 noauto_da_alloc
     mount ext4 /dev/block/mmcblk0p27 /cache wait noatime nosuid nodev barrier=1
-    mount ext4 /dev/block/mmcblk0p28 /local wait noatime nosuid nodev barrier=1
-    mount ext4 /dev/block/mmcblk0p29 /devlog wait noatime nosuid nodev barrier=1
+    mount ext4 /dev/block/mmcblk0p28 /devlog wait noatime nosuid nodev barrier=1
 
-
+    mkdir /data/radio 0770 radio radio
     mkdir /data/misc 1771 system misc
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
-    mkdir /data/d 0777 system system
-    mount debugfs /data/d /data/d
 
     chown radio system /sys/module/gpio_event/parameters/phone_call_status
     chmod 0664         /sys/module/gpio_event/parameters/phone_call_status
@@ -31,9 +31,9 @@ on fs
     chmod 0664 /sys/module/pm/parameters/idle_sleep_mode
 
     # for disabling IPv6 over mobile network.
-    write /proc/sys/net/ipv6/conf/rmnet0/disable_ipv6 1
-    write /proc/sys/net/ipv6/conf/rmnet1/disable_ipv6 1
-    write /proc/sys/net/ipv6/conf/rmnet2/disable_ipv6 1
+    #write /proc/sys/net/ipv6/conf/rmnet0/disable_ipv6 1
+    #write /proc/sys/net/ipv6/conf/rmnet1/disable_ipv6 1
+    #write /proc/sys/net/ipv6/conf/rmnet2/disable_ipv6 1
 
     # for Flip to speaker
     chown radio radio /sys/class/htc_accelerometer/accelerometer/PhoneOnOffFlag
@@ -87,54 +87,82 @@ on fs
     write /sys/devices/system/cpu/cpufreq/ondemand/up_threshold 90
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 50000
 
-service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
-    -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
-#   we will start as root and wpa_supplicant will switch to user wifi
-#   after setting up the capabilities required for WEXT
-#   user wifi
-#   group wifi inet keystore
-    socket wpa_eth0 dgram 660 wifi wifi
+on boot
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+
+service wpa_supplicant /system/bin/wpa_supplicant -Dwext -iwlan0 -c/data/misc/wifi/wpa_supplicant.conf
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKL
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKL
+    class main
     disabled
     oneshot
 
-service iprenew_eth0 /system/bin/dhcpcd -n
+service dhcpcd_p2p /system/bin/dhcpcd -aABKL
+    class main
+    disabled
+    oneshot
+
+service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_wlan0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service iprenew_p2p /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service iprenew_bnep0 /system/bin/dhcpcd -n
+    class main
     disabled
     oneshot
 
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
+    class main
     user compass
     group compass misc input
 
 # bugreport is triggered by the KEY_VOLUMEUP and BTN_MOUSE keycodes
-service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
+service bugreport /system/bin/bugmailer.sh -v
+    class main
     disabled
     oneshot
     keycodes 114 115
 
 service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm \
-    --baudrate 3000000 --patchram /etc/firmware/bcm4329.hcd /dev/ttyHS0
+    --tosleep 50000 --baudrate 3000000 --use_baudrate_for_download --i2s=1,1,0,1 \
+    --patchram /vendor/firmware/bcm4329.hcd /dev/ttyHS0
+    class main
     user bluetooth
     group bluetooth net_bt_admin
     disabled
 
-service udhcpd /system/bin/udhcpd
-    disabled
-    oneshot
-
 service rmt_storage /system/bin/rmt_storage /dev/block/mmcblk0p13 /dev/block/mmcblk0p14
+    class main
     user root
 
+on property:ro.use_data_netmgrd=false
+    # netmgr not supported on specific target
+    stop netmgrd
+
 service htc_ebdlogd /system/bin/htc_ebdlogd -s -k -P 7
+    class main
     user root
     disabled
     oneshot
 
 service htc_ebdlogd_rel /system/bin/htc_ebdlogd -s -k
+    class main
     user root
     disabled
     oneshot
