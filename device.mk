@@ -70,6 +70,7 @@ PRODUCT_COPY_FILES += \
     device/htc/vivow/voicemail-conf.xml:system/etc/voicemail-conf.xml \
     device/htc/vivow/apns-conf.xml:system/etc/apns-conf.xml
 
+# Sensors, GPS, Lights
 PRODUCT_PACKAGES += \
     lights.vivow \
     sensors.vivow \
@@ -182,10 +183,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/vivow/vold.fstab:system/etc/vold.fstab
 
-# media config xml file
-PRODUCT_COPY_FILES += \
-    device/htc/vivow/media_profiles.xml:system/etc/media_profiles.xml
-
 # Kernel modules
 #PRODUCT_COPY_FILES += \
 
@@ -202,22 +199,14 @@ PRODUCT_COPY_FILES += \
     device/htc/vivow/prebuilt/bcm4329.ko:system/lib/modules/bcm4329.ko
 
 # stuff common to all HTC phones
-#$(call inherit-product, device/htc/common/common.mk)
-
-$(call inherit-product, build/target/product/full_base.mk)
+$(call inherit-product, device/htc/common/common.mk)
 
 # common msm7x30 configs
 $(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
 
-# media profiles and capabilities spec
-$(call inherit-product, device/htc/vivow/media_a1026.mk)
-
 # htc audio settings
 $(call inherit-product, device/htc/vivow/media_htcaudio.mk)
 
-$(call inherit-product-if-exists, vendor/htc/vivow/device-vendor.mk)
+$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
 
-PRODUCT_NAME := htc_vivow
-PRODUCT_DEVICE := vivow
-PRODUCT_MODEL := Incredible 2
-PRODUCT_MANUFACTURER := HTC
+$(call inherit-product-if-exists, vendor/htc/vivow/device-vendor.mk)
