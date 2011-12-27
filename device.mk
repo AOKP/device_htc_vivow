@@ -113,7 +113,7 @@ PRODUCT_COPY_FILES += \
 
 # Firmware
 PRODUCT_COPY_FILES += \
-    device/htc/vivow/firmware/bcm4329.hcd:system/etc/firmware/bcm4329.hcd \
+    device/htc/vivow/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd \
     device/htc/vivow/firmware/default.acdb:system/etc/firmware/default.acdb \
     device/htc/vivow/firmware/default_mfg.acdb:system/etc/firmware/default_mfg.acdb \
     device/htc/vivow/firmware/default_org.acdb:system/etc/firmware/default_org.acdb \
