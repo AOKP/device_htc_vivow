@@ -109,7 +109,8 @@ PRODUCT_COPY_FILES += \
     device/htc/vivow/keylayout/vivow-keypad-ita.kl:system/usr/keylayout/vivow-keypad-ita.kl \
     device/htc/vivow/keylayout/vivow-keypad-tur.kl:system/usr/keylayout/vivow-keypad-tur.kl \
     device/htc/vivow/keylayout/vivow-keypad-wwe-bopomo.kl:system/usr/keylayout/vivow-keypad-wwe-bopomo.kl \
-    device/htc/vivow/keylayout/vivow-keypad-wwe.kl:system/usr/keylayout/vivow-keypad-wwe.kl
+    device/htc/vivow/keylayout/vivow-keypad-wwe.kl:system/usr/keylayout/vivow-keypad-wwe.kl \
+    device/htc/vivow/keylayout/atmel-touchscreen.kl:system/usr/keylayout/atmel-touchscreen.kl
 
 # Firmware
 PRODUCT_COPY_FILES += \
