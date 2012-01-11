@@ -184,6 +184,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/vivow/vold.fstab:system/etc/vold.fstab
 
+# media config xml file
+PRODUCT_COPY_FILES += \
+    device/htc/vivow/media_profiles.xml:system/etc/media_profiles.xml
+
 # Kernel modules
 #PRODUCT_COPY_FILES += \
 
