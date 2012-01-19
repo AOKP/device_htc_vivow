@@ -28,6 +28,14 @@
 /dev/akm8975_daemon       0640    compass   system
 /dev/akm8975_aot          0640    compass   system
 
+# Permissions for Camera
+/dev/msm_camera/config0 0666 system system
+/dev/msm_camera/control0 0666 system system
+/dev/msm_camera/frame0 0666 system system
+/dev/msm_camera/config1 0666 system system
+/dev/msm_camera/control1 0666 system system
+/dev/msm_camera/frame1 0666 system system
+
 #radio
 /dev/oncrpc/*           0660    radio       system
 /dev/smdcntl0           0640    radio       radio
