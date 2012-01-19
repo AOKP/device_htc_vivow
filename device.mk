@@ -203,6 +203,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/vivow/prebuilt/bcm4329.ko:system/lib/modules/bcm4329.ko
 
+# Softkey Rotation Script
+PRODUCT_COPY_FILES += \
+    device/htc/vivow/rotate_lights.sh:/system/etc/rotate_lights.sh
+
 # stuff common to all HTC phones
 $(call inherit-product, device/htc/common/common.mk)
 
