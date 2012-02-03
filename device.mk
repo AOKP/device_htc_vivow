@@ -16,6 +16,19 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
+# stuff common to all HTC phones
+$(call inherit-product, device/htc/common/common.mk)
+
+# common msm7x30 configs
+$(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
+
+# htc audio settings
+$(call inherit-product, device/htc/vivow/media_htcaudio.mk)
+
+$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
+
+$(call inherit-product-if-exists, vendor/htc/vivow/device-vendor.mk)
+
 # The gps config appropriate for this device
 
 PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
@@ -206,16 +219,3 @@ PRODUCT_COPY_FILES += \
 # Softkey Rotation Script
 PRODUCT_COPY_FILES += \
     device/htc/vivow/rotate_lights.sh:/system/etc/rotate_lights.sh
-
-# stuff common to all HTC phones
-$(call inherit-product, device/htc/common/common.mk)
-
-# common msm7x30 configs
-$(call inherit-product, device/htc/msm7x30-common/msm7x30.mk)
-
-# htc audio settings
-$(call inherit-product, device/htc/vivow/media_htcaudio.mk)
-
-$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
-
-$(call inherit-product-if-exists, vendor/htc/vivow/device-vendor.mk)
