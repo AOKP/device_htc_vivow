@@ -37,13 +37,12 @@ PRODUCT_COPY_FILES += device/common/gps/gps.conf_US:system/etc/gps.conf
 
 PRODUCT_COPY_FILES += \
     device/htc/vivow/init.vivow.rc:root/init.vivow.rc \
-    device/htc/vivow/init.rc:root/init.rc \
     device/htc/vivow/ueventd.vivow.rc:root/ueventd.vivow.rc
 
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.telephony.cdma.xml:system/etc/permissions/android.hardware.telephony.cdma.xml \
-    frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml
-##    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
+    frameworks/base/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
+    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml
 
 ## (2) Also get non-open-source GSM-specific aspects if available
 $(call inherit-product-if-exists, vendor/htc/vivow/device-vendor.mk)
@@ -92,22 +91,15 @@ PRODUCT_PACKAGES += \
 # Input device calibration files
 PRODUCT_COPY_FILES += \
     device/htc/vivow/idc/atmel-touchscreen.idc:system/usr/idc/atmel-touchscreen.idc \
+    device/htc/vivow/idc/cy8c-touchscreen.idc:system/usr/idc/cy8c-touchscreen.idc \
     device/htc/vivow/idc/elan-touchscreen.idc:system/usr/idc/elan-touchscreen.idc \
-    device/htc/vivow/idc/cy8c-touchscreen.idc:system/usr/idc/cy8c-touchscreen.idc
+    device/htc/vivow/idc/vivow-keypad.idc:system/usr/idc/vivow-keypad.idc
 
 # Keychars
 PRODUCT_COPY_FILES += \
-    device/htc/vivow/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin \
-    device/htc/vivow/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
-    device/htc/vivow/keychars/vivow-keypad.kcm.bin:system/usr/keychars/vivow-keypad.kcm.bin \
-    device/htc/vivow/keychars/vivow-keypad-ara.kcm.bin:system/usr/keychars/vivow-keypad-ara.kcm.bin \
-    device/htc/vivow/keychars/vivow-keypad-ell.kcm.bin:system/usr/keychars/vivow-keypad-ell.kcm.bin \
-    device/htc/vivow/keychars/vivow-keypad-fra.kcm.bin:system/usr/keychars/vivow-keypad-fra.kcm.bin \
-    device/htc/vivow/keychars/vivow-keypad-ger.kcm.bin:system/usr/keychars/vivow-keypad-ger.kcm.bin \
-    device/htc/vivow/keychars/vivow-keypad-ita.kcm.bin:system/usr/keychars/vivow-keypad-ita.kcm.bin \
-    device/htc/vivow/keychars/vivow-keypad-tur.kcm.bin:system/usr/keychars/vivow-keypad-tur.kcm.bin \
-    device/htc/vivow/keychars/vivow-keypad-wwe-bopomo.kcm.bin:system/usr/keychars/vivow-keypad-wwe-bopomo.kcm.bin \
-    device/htc/vivow/keychars/vivow-keypad-wwe.kcm.bin:system/usr/keychars/vivow-keypad-wwe.kcm.bin
+    device/htc/vivow/keychars/atmel-touchscreen.kcm:system/usr/keychars/atmel-touchscreen.kcm \
+    device/htc/vivow/keychars/cy8c-touchscreen.kcm:system/usr/keychars/cy8c-touchscreen.kcm \
+    device/htc/vivow/keychars/elan-touchscreen.kcm:system/usr/keychars/elan-touchscreen.kcm
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -115,33 +107,17 @@ PRODUCT_COPY_FILES += \
     device/htc/vivow/keylayout/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl \
     device/htc/vivow/keylayout/qwerty.kl:system/usr/keylayout/qwerty.kl \
     device/htc/vivow/keylayout/vivow-keypad.kl:system/usr/keylayout/vivow-keypad.kl \
-    device/htc/vivow/keylayout/vivow-keypad-ara.kl:system/usr/keylayout/vivow-keypad-ara.kl \
-    device/htc/vivow/keylayout/vivow-keypad-ell.kl:system/usr/keylayout/vivow-keypad-ell.kl \
-    device/htc/vivow/keylayout/vivow-keypad-fra.kl:system/usr/keylayout/vivow-keypad-fra.kl \
-    device/htc/vivow/keylayout/vivow-keypad-ger.kl:system/usr/keylayout/vivow-keypad-ger.kl \
-    device/htc/vivow/keylayout/vivow-keypad-ita.kl:system/usr/keylayout/vivow-keypad-ita.kl \
-    device/htc/vivow/keylayout/vivow-keypad-tur.kl:system/usr/keylayout/vivow-keypad-tur.kl \
-    device/htc/vivow/keylayout/vivow-keypad-wwe-bopomo.kl:system/usr/keylayout/vivow-keypad-wwe-bopomo.kl \
-    device/htc/vivow/keylayout/vivow-keypad-wwe.kl:system/usr/keylayout/vivow-keypad-wwe.kl \
-    device/htc/vivow/keylayout/atmel-touchscreen.kl:system/usr/keylayout/atmel-touchscreen.kl
+    device/htc/vivow/keylayout/atmel-touchscreen.kl:system/usr/keylayout/atmel-touchscreen.kl \
+    device/htc/vivow/keylayout/cy8c-touchscreen.kl:system/usr/keylayout/cy8c-touchscreen.kl \
+    device/htc/vivow/keylayout/elan-touchscreen.kl:system/usr/keylayout/elan-touchscreen.kl
 
-# Firmware
+# Device specific firmware
 PRODUCT_COPY_FILES += \
     device/htc/vivow/firmware/bcm4329.hcd:system/vendor/firmware/bcm4329.hcd \
     device/htc/vivow/firmware/default.acdb:system/etc/firmware/default.acdb \
     device/htc/vivow/firmware/default_mfg.acdb:system/etc/firmware/default_mfg.acdb \
     device/htc/vivow/firmware/default_org.acdb:system/etc/firmware/default_org.acdb \
-    device/htc/vivow/firmware/default_org_nel.acdb:system/etc/firmware/default_org_nel.acdb \
-    device/htc/vivow/firmware/vidc_720p_command_control.fw:system/etc/firmware/vidc_720p_command_control.fw \
-    device/htc/vivow/firmware/vidc_720p_h263_dec_mc.fw:system/etc/firmware/vidc_720p_h263_dec_mc.fw \
-    device/htc/vivow/firmware/vidc_720p_h264_dec_mc.fw:system/etc/firmware/vidc_720p_h264_dec_mc.fw \
-    device/htc/vivow/firmware/vidc_720p_h264_enc_mc.fw:system/etc/firmware/vidc_720p_h264_enc_mc.fw \
-    device/htc/vivow/firmware/vidc_720p_mp2_dec_mc.fw:system/etc/firmware/vidc_720p_mp2_dec_mc.fw \
-    device/htc/vivow/firmware/vidc_720p_mp4_dec_mc.fw:system/etc/firmware/vidc_720p_mp4_dec_mc.fw \
-    device/htc/vivow/firmware/vidc_720p_mp4_enc_mc.fw:system/etc/firmware/vidc_720p_mp4_enc_mc.fw \
-    device/htc/vivow/firmware/vidc_720p_vc1_dec_mc.fw:system/etc/firmware/vidc_720p_vc1_dec_mc.fw \
-    device/htc/vivow/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
-    device/htc/vivow/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw
+    device/htc/vivow/firmware/default_org_nel.acdb:system/etc/firmware/default_org_nel.acdb
 
 # Audio DSP Profiles
 PRODUCT_COPY_FILES += \
@@ -151,7 +127,6 @@ PRODUCT_COPY_FILES += \
     device/htc/vivow/dsp/AIC3254_REG_DualMic.csv:system/etc/AIC3254_REG_DualMic.csv \
     device/htc/vivow/dsp/AIC3254_REG_DualMic_NEL.csv:system/etc/AIC3254_REG_DualMic_NEL.csv \
     device/htc/vivow/dsp/AIC3254_REG_DualMicXB.csv:system/etc/AIC3254_REG_DualMicXB.csv \
-    device/htc/vivow/dsp/AudioBTID.csv:system/etc/AudioBTID.csv \
     device/htc/vivow/dsp/TPA2051_CFG.csv:system/etc/TPA2051_CFG.csv \
     device/htc/vivow/dsp/TPA2051_CFG_NEL.csv:system/etc/TPA2051_CFG_NEL.csv \
     device/htc/vivow/dsp/CodecDSPID_BCLK.txt:system/etc/CodecDSPID_BCLK.txt \
@@ -192,7 +167,12 @@ PRODUCT_COPY_FILES += \
     device/htc/vivow/dsp/soundimage/Sound_Treble_Booster.txt:system/etc/soundimage/Sound_Treble_Booster.txt \
     device/htc/vivow/dsp/soundimage/Sound_Vocal_Booster.txt:system/etc/soundimage/Sound_Vocal_Booster.txt \
     device/htc/vivow/dsp/soundimage/Sound_Rec_Landscape.txt:system/etc/soundimage/Sound_Rec_Landscape.txt \
-    device/htc/vivow/dsp/soundimage/Sound_Rec_Portrait.txt:system/etc/soundimage/Sound_Rec_Portrait.txt
+    device/htc/vivow/dsp/soundimage/Sound_Rec_Portrait.txt:system/etc/soundimage/Sound_Rec_Portrait.txt \
+    device/htc/vivow/dsp/soundimage/srs_geq10.cfg:system/etc/soundimage/srs_geq10.cfg \
+    device/htc/vivow/dsp/soundimage/srsfx_trumedia_51.cfg:system/etc/soundimage/srsfx_trumedia_51.cfg \
+    device/htc/vivow/dsp/soundimage/srsfx_trumedia_movie.cfg:system/etc/soundimage/srsfx_trumedia_movie.cfg \
+    device/htc/vivow/dsp/soundimage/srsfx_trumedia_music.cfg:system/etc/soundimage/srsfx_trumedia_music.cfg \
+    device/htc/vivow/dsp/soundimage/srsfx_trumedia_voice.cfg:system/etc/soundimage/srsfx_trumedia_voice.cfg
  
 PRODUCT_COPY_FILES += \
     device/htc/vivow/vold.fstab:system/etc/vold.fstab
