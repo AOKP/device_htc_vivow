@@ -82,6 +82,9 @@ postprocess.denoise_level=5
 # Recording Audio Workaround
 ro.camera.sound.disabled=1
 
+# camera preview hack
+ro.camera.preview=true
+
 # USB Mount
 persist.sys.usb.config=mass_storage,adb
 persist.service.adb.enable=1
