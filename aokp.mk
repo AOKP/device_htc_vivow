@@ -2,7 +2,7 @@ PRODUCT_RELEASE_NAME := Inc2
 
 # Inherit some common AOKP stuff.
 $(call inherit-product, vendor/aokp/configs/common.mk)
-$(call inherit-product, vendor/aokp/configs/common-versions.mk)
+$(call inherit-product, vendor/aokp/configs/common_versions.mk)
 $(call inherit-product, vendor/aokp/products/vivow.mk)
 
 $(call inherit-product, device/htc/vivow/full_vivow.mk)
